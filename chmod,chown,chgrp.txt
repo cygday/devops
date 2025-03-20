@@ -1,0 +1,118 @@
+
+permission are of four types
+read, write, execute
+
+read=> view contents and allows to list contents of a directory
+write=> modify content and allow create and remove, edit contents
+execute=> run a file or execite a program/ script and change directory a, allows long listing
+- -> no permision
+rwx-> read write and execute
+
+mkdir data
+cd /data
+touch hello.txt
+ls -l
+mkdir demodir
+ls -l
+
+to give full permision to owner
+chmod 700 hello.txt
+ls -l
+
+chmod 702 hello.txt
+ls -l
+chmod 702 demodir/
+ls -l
+
+to remove directory
+rm -r demodir/myfiles.txt/
+
+to make a new file
+touch /demodir/myfiles/newfile.txt
+
+to change permissions
+ls -l
+
+chmod -R 770 demodir/
+ls -l
+
+chmod g+r,o+r hello.txt
+ls -l
+chmod go+r hello.txt
+chmod go+x hello.txt
+chmod u-w hello.txt
+chmod -R o+rwx, g_x,u-r demodir
+
+to give permissino read, write and execute 
+
+while forming foldere the defautl value of permission is 755
+
+to change permission of a file
+chmod 700 filename
+
+to change permission of a folder and child directory
+chmod -R 770 foldername/
+
+chmod u(owner)+r, g(group)+r(read), o(others) +r(read) file.txt
+
+chmod go+r file.txt
+chmod go+x file.txt
+chmod u-w file.txt->remove write permission from owner
+chmod -R o+rwx,g-x,u-r demodir/ 
+ls -l
+
+sudo chmod 700 demodir/
+sudo chmod 700 hello.txt
+
+sudo chmod -R u+r, go-rwx demodir/
+
+how to change owner name
+sudo chown arzun newfile.txt
+
+how to change group name
+sudo chgrp arzun arjun/
+
+how to change both
+sudo chown -R arjun:admin arjun/
+
+
+setUID
+chmod u+s filename
+chmod u-s filename
+
+setGID->for file and directory->if this is set on a directory, then andy files created inherite the owner
+ls -l newdir
+ls -ld newdir->shows the group
+
+chmod g+s filename
+chmod g-s filename/foldername
+
+
+sticky bit->for directory
+cat /etc/passwd/->those who own can only delete the group and user
+ls -ld sharedir/
+chgrp adming shareddir
+ls -ld shareddir/
+chmod g+w shareddir
+ls -ld /root/
+chmod o+rwx /root/
+login with other user
+and change
+chmod 1775 shareddir
+to remove sticky bit use 0 instead of 1
+chmod +t directoryname
+
+
+how to delete user from the /home/...
+sudo userdel -r username
+
+to check the user exist
+cat /etc/passwd | grep -E "username"
+if nothing appears then the username isnot available
+
+manually remove home directories if still present
+
+sudo rm -rf /home/username
+it deletes the folder from the home directories
+
+
