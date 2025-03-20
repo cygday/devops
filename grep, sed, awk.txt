@@ -1,0 +1,55 @@
+
+grep command line tools, searches from linux system, it prints the specific line of file
+
+cat filename.txt
+grep -i devops lorem.txt(case insentive)
+
+grep -in devops lorem.txt -> shows case insensetive devoops word  of file lorem.txt
+ 
+
+gep -i error /var/log/syslog
+grep -i error /var/log/syslog->shows particular line's error
+grep ^word filename -sentence starting with word
+grep word$ filename->end with word
+gep [0-9] filename
+
+to search from anywhere
+grep -i word *->searches from anywhere
+grep -iR word * -> searches gre recursively
+grep T[oO]mmy filename.txt-> searches either o or O fromo file
+
+to revert the grep
+grep -v T[oO]mmy filename.txt
+
+cat -n tutorail
+cat /var/log/syslog | grep - piped to grep
+
+
+sed is stream editor which search the word in file 
+
+sed -e 's/searchword/replaceword/' filename.txt > filenew.txt-> output to filenew.txt, -e-expreson
+sed -i 's/searchword/replaceword/' filename.txt-> -i writes on same file.
+sed -i 's/searchword/replaceword/g' filename.txt-> globally search replace
+
+cat /etc/passwd->shows password
+root:x:0:0:root:/root:/bin/bash
+user column: x-path to passwd file, 0:user id,0:group id,root:additional details,/root:home directory, /bin/bash 
+
+to cut out first column
+cut -  to findout column
+cut -d ":" -f1 /etc/passwd-> -d delimiter->shows first column
+cut -d ":" -f3 /etc/passswd=> user id column
+cut -d ":" -f3-4 /etc/passwd -> shows third and fourth column
+
+
+df -h->shows disk utilization info
+
+df -h | cut -d " " -f4 -> df files are saved through cut but this is not possible because of ununiform space
+
+for this type of cut, we need more advance tool like awk
+
+
+awk is processing text files, parsing files and generating
+reports
+df -h  | awk -F " " ' {print $4}'
+
