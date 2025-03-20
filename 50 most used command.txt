@@ -1,0 +1,114 @@
+
+most used linux commands
+
+ls -list of files and directories
+pwd - present working directory
+cd -current directory
+mkdir - make new directory
+mv - move
+cp - copy
+rm - remove
+touch - create empty files
+ln - create hard/soft link
+clear - clear the screen
+cat -contatenate or display the file 
+echo - print out
+less - used to view contents by a page
+	live monitoring
+	less +F /var/log/syslog
+man - its a manual for a given command eg: man man
+uname - /usr/bin/uname 
+	uname -a
+whoami - shows the currrent user
+tar - helps create, extract and list archive
+	contents
+grep - globally regular expression pattern
+	grep foo-> searches all files in 
+	curent directory for the string foo
+head - shows the top contents of file
+	head -n 20 file.txt->shows the first
+	20 lines of a file.txt
+tail - displays the last 10 lines of the 
+	file.
+	tail -n 50 /var/log/auth.log-> 
+	displays the last 50 lines of the
+	file
+diff - compares two files line by line and 
+	displays the differences
+	diff [option] file1 file2
+cmp - compares two files byte-by-byte and
+	reports the first difference
+	cmp [-l | -s] file1 file2
+comm - compares two sorted files and produce
+	three columns of output, separated
+	by tabs
+sort - to sort a file arranging the records
+	in a particular order
+	sort file.txt
+export - used to mark variables and function
+	to be passed to child process
+	$ export
+zip - compresses files and directories into 
+	a single archive file with the .zip
+	extension
+	zip outputname filename
+unzip - use to extract files from zip 
+	archive, preserving directories
+	structure and permission
+ssh - use to connect  to server
+service - use to manage system services
+	sudo service apache2 start
+	to start the apache web server
+	sudo servicec ssh stop
+	to stop the ssh service
+	sudo service network status
+	to check the status of network 
+	service
+ps - shows a list of currently running
+	process 
+	ps -ef
+kill and killall - kill used to terminate
+	a single process by its PID
+	killall termiantes all processes 
+	matching a specific name
+df - used to diplay informatio about the 
+	available disk space on your
+	mounted file system
+	df -h->human-readable format 
+mount - attaches a file system to a
+	directory 
+	mount sdb1 /mnt/media->to mount a 
+	file system
+chmod - use to change permission of file
+chown - use to change owner of file
+ifconfig - use to show ip details
+traceroute - to trace the ip or domain
+	traceroute 192.168.1.25
+wget - use to retrieve files from internet
+	via http, https and ftp protocols
+	wget http://example.com/abc.php
+	to download a single fiel from
+	a url
+ufw -to manage firewall ruules on a linux
+iptables - to manage the linux firewall
+apt, pacman, yum, rpm - to install, remove
+	and manage software packages
+sudo - root user
+cal - displays a calender in terminal
+alias - creates shortcut for existing
+	commands
+dd - copies and converts data between
+	files or devices 
+wheris - to find the location of a file
+	such as binary, source or manual
+	page
+	whereis [options] command
+whatis -  ask quesiton, use to find infor
+	mation about a command, system
+	call or other item
+	eg: whatis ls
+top - table of process, to view running
+	process  and kernel managed
+	task  in linux
+useradd - to add user
+passwd - changes a user passwd
