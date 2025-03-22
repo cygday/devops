@@ -1,0 +1,64 @@
+Vagrant.configure("2") do | config |
+config.vm.box ="ubuntu/xenial64"
+config.vm.network "forwarded_port", guest:80, host:8080
+config.vm.network "forwarded_port", guest:80, host:8080, host_ip:"127.0.0.1"
+config.vm.network "private_network", ip:"192.168.33.10"
+config.vm.network "public_network"
+config.vm.synced_folder "~/Desktop","/home/vagrant/Desktop"
+config.vm.provider "virtualbox" do |vb|
+vb.memory="2048"
+vb.cpus=2
+end
+config.vm.provision "shell", inline:<<-SHELL
+apt-get update
+apt-get install apache2 -y
+end
+
+
+HOW TO INSTALL WORDPRESS ON VM
+
+sudo apt update && sudo apt upgrade -y
+
+sudo apt install apache2 -y
+restart or enable and check status
+
+sudo apt install mysql-server -y
+after installation, secure the mysql
+
+sudo mysql_secure_installation
+
+
+sudo apt install php php-mysql liapache2-mod-php php-xml php-gd php-mbstring php-curl php-zip php-soap php-intl php-json -y
+
+restart apache to reload
+sudo systemctl restart apache2
+
+create a mysql database for wordpress
+
+sudo mysql -u root -p
+sql: create database wordpress;
+sql: create user 'wpuser' @ 'localhost' identified by 'ur_password';
+sql: grant all priveleges on wordpress.* to 'wpuser'@'localhost';
+sql: flush priveleges;
+sql: exit
+
+download the latest versiono of wordpress
+cd /tmp wget https://wordpress.org/latest.tar.gz
+
+tar -xvzf latest.tar.gz
+sudo mv wordpress /var/www/html
+
+sudo chown -R www-data:www-data /var/www/html/wordpress
+
+sudo cp wp-config-sample.php wp-config.php
+
+sudo nano wp-config.php
+replace db_name, db_password, db_user accordingly with your own
+save and exit
+
+set up permission
+sudo chown -R www-data:www-data /var/www/html/wordpress
+
+enable apache rewrite module
+sudo a2enmod rewrite
+sudo systemctl restart apache2
