@@ -1,0 +1,133 @@
+sudo - super user do(works as root user)
+
+su -username
+password 
+
+add user
+sudo adduser arun
+su - arun
+arun@ubuntuserver: sudo apt update
+password:......
+arun is not in the sudoers file
+
+
+theres special files in linux
+
+ls /etc/sudoers->default configuration file ->
+sudoers sudoers.d/
+
+you must be root user
+to open and edit sudoers.d file 
+=>sudo visudo
+=>sudo vim /etc/sudoers/
+ 
+or directly jump into vim editor
+#visudo -f /etc/sudoers
+
+how to open with nano editor
+=>sudo EDITOR=nano visudo
+
+#host alias specification
+#user alias specification
+#cmnd alias specification
+#user privilege specification
+
+root ALL=(ALL:ALL) ALL->
+root -usernmae
+ALL-hostname, username
+(ALL->on behalf of which group
+ALL)->member of this group
+ALL->as all commands
+
+<user><host>=(<run_as_user>)<command>
+newuser ALL=(ALL:ALL)->newuser can do anything 
+
+newuser ALL=(ALL:ALL) /usr/bin/apt=>this allows the newuser to run /usr/bin/apt command only
+
+run this usr/bin/apt from the terminal using newuser@ubuntuserver
+to check sudo apt update
+
+
+
+to allow a user to run specific commands only=>
+username ALL=(ALL) /usr/bin/systemctl restart apache2, /usr/bin/apt update
+this allows the user to restart apache and update packages, but nothing else
+
+
+
+check fdisk -l can run fromo the newuser@ubuntuserver->permission denied
+
+to allow
+newuser all=(all:all) /usr/bin/apt,/usr/sbin/fdisk
+
+now sudo fdisk -l is allowed from the newuser@ubuntuserver
+
+cat /etc/shadow->is not allowed to execute
+newuser ALL=(ALL:ALL) /etc/shadow/
+
+username all=(all:all)all, !/usr/sbin/fdisk/
+=> username is not allowed to use fdisk -l
+
+syntax error
+username all(all:all) all
+shows newuser all(all:all) all, !/usr/sbin/fdisk
+
+sudo visudo /etc/sudoers/
+options /e,x,q
+
+username all=(all:all) all->this username is allowed to do all command
+
+how to edit group
+%sudo ALL=(ALL:ALL) ALL
+@includedir /etc/sudoers.d
+
+to check the username
+whoami
+
+use who to display the current user
+user w to display current user and more detailed information
+
+
+how to add no password on sudo user
+newuser ALL=(ALL:ALL) all, /usr/bin/apt
+
+switch user su -newuser
+sudo apt update->doesnot ask password
+
+sudo -i-> changes to root user
+su - newuser-> changes to newuser /home/newuser.
+sudo su
+
+cd /etc/sudoers.d
+theres only readme file
+
+create new file
+vim username.txt 
+newuser ALL=(ALL:ALL) ALL
+save and exit
+
+check from vm and terminal
+
+
+user_Alias TRUSTED_USERS=usernames,username,usrname,usernmae
+Cmnd_Alias ALLOWED_CMD=/bin/bash,/usr/bin/apt
+Cmnd_Alias NOT_ALLOWED=
+Host_Alias TRUSTED_HOSTS=localhost, 192.168....
+
+TRUSTED_USERS TRUSTED_HOSTS=
+
+
+need to login with ssh and change sudo permission of user and password, and edit with vim editor 
+
+hands on practice to sudoers and chnage permisssin 
+
+
+e: couldnot open the lock file error while upadte and install \?
+=>ps aux | grep apt
+show the active operation and kill using PID
+=> kill PID
+
+a->show processes for all user
+u->displays the process user/owner
+x->also show processes not attached to a terminal
+

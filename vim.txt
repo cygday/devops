@@ -1,0 +1,86 @@
+vim(visual improved  	editor)
+it was developed in 1991 by linus torvalds as a hobby prooject, linux kernel
+has many distributions like ubuntu, centOS, redhat, debian, kali linux
+vim is popular for its flexibility and efficiency, was developed in 1976 yb
+bill joy.
+
+basic vim commands
+
+to create file
+vim filename.txt
+
+hello and welcome is tutorial for vim
+to INSERT MODE-PRESS a/i
+TO QUIT PRESS ESC AND :q
+TO NAVIGATE k->up, j->down, h-left, l-right
+TO DELETE THE LINE PRESS-> dd
+TO DELETE LINE FROM 7 to 12 ->:7,12d
+TO UNDO PRESS-> u
+TO CHANGE VISUAL MODE PRESS->v in command mode
+TO FORCE QUIT PRESS -> :q!
+TO PASTE THE LINE -> p 
+
+TO REPLACE A WORD WITH SECOND 
+:%s/firstword/secondword/g
+
+-> [range]s/{pattern}/{STRINGS}/[FLAGS-> c(confirm), i(case insensitive), g(make change global)]
+
+TO DELETE A WORD->MOVE CURSOR TO WORD AND press down d
+
+-> :1,2s/that/ hello and welcome/gci
+-> :1,21s/press/press down/gci
+
+
+w- next word right
+e-end of next word
+b-begining of word left
+$ at the end of sentence
+0 starts the begining of sentence
+* to find the occurence of same alphabet
+# to find the occurence of same alphabet
+g goes to the begining of paragraph
+gg goes to the begining of paragraph
+/ insert mode
+n
+N
+o new line insert
+shift o to make new  above 
+x delete right side
+u-undo
+ctrl + r-redo
+dd- deleter full 
+p- paste
+
+to search and replace the  word
+:%s/word/replace
+
+to go to  line no. of file
+vim +2 filename.txt
+
+how to access contents of file
+less filename.txt
+
+to set number -> :set nu
+to hide number -> :set nonu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

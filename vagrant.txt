@@ -1,0 +1,311 @@
+vagrant=> use to make vm, it is command line tool,no gui
+
+install vagrant
+after installation
+cmd vagrant
+
+vagrant --version
+vagrant init
+vim vagrant 
+line 15 config.vm.box
+
+edit vagrant file
+vim Vagrantfile with proper box name
+
+vagrant up
+
+could not load the /home/arzun/base folder
+edit Vagrantfile in vim
+then place a suitable box from https://portal.cloud.hashicorp.com/vagrant/discover
+
+once the vm is running, access it via SSH:
+vagrant ssh
+
+the username and password of ubuntu-trusty64
+username-vagrant
+password-vagrant
+
+Single VM Vagrantfile
+
+The following Vagrantfile has all the concepts I have explained above.
+
+    Creates VM with ubuntu/trusty64 box
+    Enables private network, public_network, 	and port forwarding on host port 8080
+    Custom shared folder
+    Custom CPU and memory
+    Shell provisioner to install apache2
+
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "bento/ubuntu-22.04"
+
+  config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "public_network"
+  config.vm.network "forwarded_port", guest: 80, host: 8080(jenkins, tomcat)
+
+  config.vm.synced_folder "code/", "/app/code"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = 2048
+    vb.cpus = 1
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update
+    apt-get install -y apache2
+    apt install net-tools -y(user yes/no->disable by -y)
+    service apache2 start
+  SHELL
+end
+
+after configuration, do
+
+vagrant up
+
+two types of provisioner
+running machine-vagrant reload doesnot work, running machine-vagrant provision
+fresh machine-automatically run
+
+provision can be run with shell
+inline script=> 
+vagrant.configure("2") do |config|
+config.vm.provision "shell"
+inline: "echo hello, world"
+
+end
+
+external script
+make and script file install_app.sh
+
+shebang
+echo "install apache2.."
+sudo apt update
+sudo apt install apache2 -y\
+cd /tmp
+wget https://www.tooplate.com/zip-templates/2131_wedding_lite.zip
+unzip 2131_wedding_lite.zip
+cp -r 2131_wedding_lite.zip/* /var/www/html/
+sudo systemctl restart apache2
+rm -r 2131_wedding_lite.zip   
+
+save
+
+vim vagrantfile
+config.vm.provision "shell", path:"install_app.sh"
+
+end
+
+vagrant --provision- boot straping
+
+vagrant destroy - removes the 
+
+vagrant proviisoner script
+hashicorp 
+
+vim install_app.sh
+
+#!/bin/bash
+echo "install apache2"
+sudo apt update
+sudo ap tinstall apache2 -y
+cd /tmp
+wget https:/
+uunzip 
+cp -r 
+sudo styemctl restart apache2
+rm -r 
+
+
+
+config.vm.provision "shell", path: " install_app.sh"
+end
+
+tooplates
+
+
+vagrant status - shows vagrant 
+vagrant global-status
+vagrant global-status --prune
+
+ls .vagrant/machines/defqult/virtualbox
+
+ssh vagrant@192.168.56.2
+yes
+ssh -i private-key path@192.168.56.2
+
+multi vm vagrant
+
+mkdir multivm
+cd multivm
+vagrant init
+vim Vagrantfile
+///copied from github
+
+Vagrant.configure("2") do |config|
+    config.vm.provision "shell", inline: "echo Hello"
+  
+    config.vm.define "web" do |web|
+      web.vm.box = "ubuntu/focal64"
+      web.vm.network "private_network", ip: "192.168.56.6"
+      web.vm.synced_folder "../multiVM", "/vagrant"
+      web.vm.provider "virtualbox" do |vb|
+        vb.memory = "1024"
+        vb.cpus = 2
+        end
+        web.vm.provision "shell", inline: <<-SHELL
+        apt update
+        apt install apache2 wget unzip -y
+        systemctl start apache2
+        systemctl enable apache2
+        cd /tmp/
+        wget https://www.tooplate.com/zip-templates/2129_crispy_kitchen.zip
+        unzip -o 2129_crispy_kitchen.zip
+        cp -r 2129_crispy_kitchen/* /var/www/html/
+        systemctl restart apache2
+      SHELL
+    end
+  
+    config.vm.define "db" do |db|
+      db.vm.box = "generic/centos8"
+      db.vm.network "private_network", ip: "192.168.56.7"
+      db.vm.provider "virtualbox" do |vb|
+           vb.memory = "1024"
+           vb.cpus = "1"
+         end
+        db.vm.provision "shell", inline: <<-SHELL
+        yum update
+        yum install mariadb-server -y
+        systemctl start mariadb
+        systemctl enable mariadb 
+        SHELL
+  end
+end
+
+
+how to know the available vagrant
+vagrant global-status
+
+
+how to delete a vagrant
+vagrant destroy -f(deletes all files from vagrant forcefully)
+
+using id
+vagrant destroy <VIM_ID>
+
+vagrant.configure("2") do | config |
+provisioner....
+config.vm.define "web" do | web|
+web.vm.box="apache"
+end
+
+config.vm.define "db" do | db|
+web.vm.box="mysql"
+end
+
+vagrant disk management
+config.vn.disk :disk, size: "" primary="true"
+
+vagrant plugins
+google search vagrant plugin
+vagrant plugin list
+
+
+application/web server-tomcat/apache
+
+apache2 web server->http web server->open source 
+
+make a virtual machine 
+vagrant ssh->
+sudo apt update
+sudo apt install apche2
+cat /etc/passwd->www-data
+
+sudo systemctl status apache2
+ls /var/www/html/->show index.html->ip addr show-> enter ip and shows html
+
+to check log file
+cd /var/log/apache2
+
+cat access.log
+cat error.log
+
+to check the website is running or not-> curl http://localhost
+check it from terminal -> curl http://127.0.0.1
+
+to check the port
+telnet localhost port
+
+journalctl -xe -> to watch error
+journalctl -u apache2->to watch error
+
+apache2 configuration->cd /etc/apache2
+
+~tree /etc/apache2->show tree structure
+
+virtual hosting-> /etc/apache2/sites-available
+
+
+name base hosting and virtual based hosting
+
+vagrant ssh
+how to host wordpress using apache
+search insatlll an configure wordpress
+
+install dependencies
+copy sudo 
+
+host wordpress and apache separately host
+
+
+
+LAMP AND LEMP
+
+how to host wordpress in vagrant
+
+	
+vagrant box list
+vagrant global-status
+
+
+
+
+
+
+
+todo->mysql and wordpress-> vagrant presentation
+
+127.0.0.1/wordpress-> if not available re-install wordpress again
+
+
+mysql password->cygday
+
+if the systemctl restart apache doesnot run then error can be checked with
+sudo apachectl configtest
+if theres an error, it will specify the file and line number
+
+sudo nano /etc/apache2/sites-available/wordpress.conf
+
+look for customlog entry
+customlog ${APACHE_LOG_DIR}/access.log combined
+or
+customlog /var/log/apache2/acess.log combined
+
+save and restart apache
+
+if the server id reloads the defautl apache page, then 
+enter serverip/wordpress
+
+or
+
+edit /etc/apache2/sites-available/000-default.conf
+ensure the code correctyl
+
+DocumentRoot /var/www/html/wordpress
+save and exit
+
+
+wordpress password s5U*e0kzxxL$7BuZ6a
